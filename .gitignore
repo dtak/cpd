@@ -4,7 +4,7 @@ TCPD/
 
 # Cache
 __pycache__
-cpdmoht.egg-info/
+cpd.egg-info/
 
 # Environment
 .venv

@@ -1,7 +1,7 @@
 [project]
-name = "cpdmoht"
+name = "cpd"
 version = "0.1.0"
-description = "CPD-MOHT"
+description = "Changepoint detection"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -23,7 +23,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 # Use dynamic package discovery to include only the desired package.
-include = ["cpdmoht"]
+include = ["cpd"]
 exclude = ["TCPD", "baselines"]
 
 
