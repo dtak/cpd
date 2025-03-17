@@ -1,0 +1,10 @@
+# External dependencies
+baselines/
+TCPD/
+
+# Cache
+__pycache__
+cpdmoht.egg-info/
+
+# Environment
+.venv

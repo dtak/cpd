@@ -1,0 +1,76 @@
+[project]
+name = "cpdmoht"
+version = "0.1.0"
+description = "CPD-MOHT"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "jupyter",
+    "ipykernel",
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "seaborn",
+    "scikit-learn",
+    "scipy",
+    "tqdm",
+    "ruptures",
+]
+
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+# Use dynamic package discovery to include only the desired package.
+include = ["cpdmoht"]
+exclude = ["TCPD", "baselines"]
+
+
+## Ruff formatting / linting settings
+[tool.ruff]
+
+# Assume Python 3.12 is the target version
+target-version = "py312"
+
+# Same as Black.
+line-length = 80
+indent-width = 2
+
+[tool.ruff.format]
+# Prefer single quotes over double quotes.
+quote-style = "single"
+
+
+[tool.ruff.lint]
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
+# McCabe complexity (`C901`) by default.
+select = ["D", "D417", "E", "F"]
+
+# D104: Missing docstring in public package
+ignore = ["D104"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"  # Accepts: "google", "numpy", or "pep257".
+
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "single"
+multiline-quotes = "single"
+
+[tool.ruff.lint.flake8-import-conventions.aliases]
+# Declare the default aliases.
+altair = "alt"
+"matplotlib.pyplot" = "plt"
+numpy = "np"
+pandas = "pd"
+seaborn = "sns"
+scipy = "sp"
+stable_baselines3 = "sb3"
+
+[tool.ruff.lint.isort]
+# Sort imports
+from-first = true
+force-single-line = true
+force-sort-within-sections = true
