@@ -1,3 +1,5 @@
+"""Create synthetic multivariate time series data."""
+
 import numpy as np
 
 
@@ -9,8 +11,8 @@ def create_synthetic_multivariate_time_series(
   """Creates a synthetic multivariate time series dataset with shape (N, T, D).
 
   Each time series is of length T and dimension D.
-  The series is divided into segments by the change_points, with segments alternating
-  between:
+  The series is divided into segments by the change_points, with segments
+  alternating between:
     - Random observations drawn from a standard normal distribution.
     - A linear trend with random slope and intercept (plus a small noise term).
 
