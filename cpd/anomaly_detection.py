@@ -73,17 +73,18 @@ class MultivariateTSAnomalyDetector:
 
       return result.trend, error
 
-    except:
+    except Exception as e:
       logger.warning(
         f'Decomposition failed for series {series.name}. Using simpler method.'
       )
+      logger.warning(f'Error: {e}')
       # If decomposition fails (e.g., not enough data), use simpler method
       trend = interpolated.rolling(window=self.freq, min_periods=1).mean()
       error = series - trend
       return trend, error
 
   def transform_errors_to_zscores(self, errors):
-    """Transform errors non-parametrically into Z-scores using rank-based methods.
+    """Transform errors non-parametrically to Z-scores using rank-based methods.
 
     Following probability integral transform approach from the paper.
 
@@ -111,7 +112,8 @@ class MultivariateTSAnomalyDetector:
 
       # Transform to normal distribution using probability integral transform
       # Following formula in the paper: Φ^(-1)((rank(ε_i,j))/(m+1))
-      # where m is the number of observations and Φ^(-1) is the inverse CDF of standard normal
+      # where m is the number of observations and Φ^(-1) is the inverse CDF of
+      # standard normal
       m = len(valid_errors)
       transformed = pd.Series(
         stats.norm.ppf(ranks / (m + 1)), index=valid_errors.index
@@ -147,11 +149,7 @@ class MultivariateTSAnomalyDetector:
     cov_matrix = valid_rows.cov()
 
     # Handle potential singular covariance matrix
-    try:
-      inv_cov = inv(cov_matrix.values)
-    except:
-      # If inversion fails, use pseudoinverse
-      inv_cov = np.linalg.pinv(cov_matrix.values)
+    inv_cov = inv(cov_matrix.values)
 
     # Get mean vector
     mean_vector = valid_rows.mean().values
@@ -403,7 +401,7 @@ def synthetic_example():
   print(f'Detected {len(anomaly_days)} anomalous days:')
   for day in anomaly_days:
     print(
-      f'- {day.date()} (T² = {results["t2_stats"][day]:.2f}, p = {results["p_values"][day]:.4f})'
+      f'- {day.date()} (T² = {results["t2_stats"][day]:.2f}, p = {results["p_values"][day]:.4f})'  # noqa: E501
     )
 
   return df, results, fig
