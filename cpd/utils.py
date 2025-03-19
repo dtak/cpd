@@ -35,8 +35,8 @@ def get_tcpd_annotations(
   return annotations
 
 
-def load_dataset(filename: str) -> tuple[dict, np.ndarray]:
-  """Load a CPDBench dataset.
+def load_tcpd_dataset(filename: str) -> tuple[dict, np.ndarray]:
+  """Load a TCPD dataset.
 
   Source: https://github.com/alan-turing-institute/TCPDBench/blob/master/execs/python/cpdbench_utils.py
   """
