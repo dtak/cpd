@@ -15,6 +15,7 @@ dependencies = [
     "scipy",
     "tqdm",
     "ruptures",
+    "statsmodels",
 ]
 
 [build-system]
